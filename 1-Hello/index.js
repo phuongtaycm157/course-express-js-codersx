@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var port = 8008;
 
+var bodyParser = require('body-parser');
+
 var users = [{
         firstName: 'John',
         lastName: 'Doe',
@@ -22,6 +24,10 @@ var users = [{
 app.set('views', './views');
 app.set('view engine', 'pug');
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true}));
+
+
 app.get('/', function(request, response) {
     response.render('index', {
         name: 'Nishi'
@@ -38,6 +44,15 @@ app.get('/users/search', function(req, res) {
         return user.firstName.toLowerCase().indexOf(q.toLowerCase()) !== -1 || user.lastName.toLowerCase().indexOf(q.toLowerCase()) !== -1;
     });
     res.render('users/index', { users: matchUsers, q: q });
+});
+
+app.get('/users/create', function(req, res) {
+	res.render('users/create');
+});
+
+app.post('/users/create', function(req, res) {
+	users.push(req.body);
+	res.redirect('/users');
 });
 
 app.listen(port, function() {
