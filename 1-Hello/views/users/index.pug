@@ -13,6 +13,10 @@ html
 	body
 		.container
 			h1.display-4.mb-5 User List
+			form(action="/users/search" method="GET" class="form-inline mb-2")
+				.form-group
+					input(type="text" name="q" class="form-control mr-3" value=q placeholder="Enter name to find...")
+					button(type="submit" class="btn btn-primary") Submit
 			table.table.table-striped
 				thead
 					tr
