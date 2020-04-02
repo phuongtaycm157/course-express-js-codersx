@@ -18,6 +18,11 @@ var users = [{
         firstName: 'July',
         lastName: 'Dooley',
         email: 'july@example.com'
+    },
+    {
+        firstName: 'Tay',
+        lastName: 'Nguyen',
+        email: 'tay@example.com'
     }
 ];
 
