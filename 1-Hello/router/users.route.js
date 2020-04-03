@@ -1,37 +1,18 @@
 var express = require('express');
 var router = express.Router();
-var shortid = require('shortid');
+var controllers = require('../controllers/users.controllers');
+var bodyParser = require('body-parser');
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true}));
 
-var db = require('../db');
+router.get('/', controllers.index);
 
+router.get('/view/:id', controllers.view);
 
-router.get('/', function(request, response) {
-    response.render('users/index', { users: db.get('users').value() });
-});
+router.get('/search', controllers.search);
 
-router.get('/view/:id', function(req, res) {
-    var id = req.params.id;
-    var user = db.get('users').find({ id: id }).value();
-    res.render('users/view', {user: user});
-});
+router.get('/create', controllers.getCreate);
 
-router.get('/search', function(req, res) {
-    var q = req.query.q;
-    var matchUsers = db.get('users').value().filter(function(user) {
-        return user.firstName.toLowerCase().indexOf(q.toLowerCase()) !== -1 || user.lastName.toLowerCase().indexOf(q.toLowerCase()) !== -1;
-    });
-    res.render('users/index', { users: matchUsers, q: q });
-});
-
-router.get('/create', function(req, res) {
-	res.render('users/create');
-});
-
-router.post('/create', function(req, res) {
-    user = req.body;
-    user.id = shortid.generate()
-	db.get('users').push(user).write();
-	res.redirect('/users');
-});
+router.post('/create', controllers.postCreate);
 
 module.exports = router;
