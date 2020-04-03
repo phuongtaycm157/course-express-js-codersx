@@ -28,6 +28,12 @@ app.get('/users', function(request, response) {
     response.render('users/index', { users: db.get('users').value() });
 });
 
+app.get('/users/view/:id', function(req, res) {
+    var id = req.params.id;
+    var user = db.get('users').find({ id: id }).value();
+    res.render('users/view', {user: user});
+});
+
 app.get('/users/search', function(req, res) {
     var q = req.query.q;
     var matchUsers = db.get('users').value().filter(function(user) {

@@ -25,12 +25,18 @@ html
 						th Fisrt Name
 						th Last Name
 						th Email
+						th Control
 				tbody
 					each user in users
 						tr
-							td= user.firstName
-							td= user.lastName
-							td= user.email
+							td
+								span= user.firstName
+							td
+								span= user.lastName
+							td
+								span= user.email
+							td
+								a(href="/users/view/"+user.id).btn.btn-info info
 
 
 		//Optional JavaScript
