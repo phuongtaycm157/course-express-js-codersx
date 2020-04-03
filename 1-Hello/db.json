@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "id": "bZ_HmBQ5b",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john@example.com"
+    },
+    {
+      "id": "Ln37fsDP1S",
+      "firstName": "Mary",
+      "lastName": "Moe",
+      "email": "mary@example.com"
+    },
+    {
+      "id": "uLhWf1RLAv",
+      "firstName": "July",
+      "lastName": "Dooley",
+      "email": "july@example.com"
+    },
+    {
+      "id": "Ha7WiyqMgp",
+      "firstName": "Tay",
+      "lastName": "Nguyen",
+      "email": "tay@example.com"
+    },
+    {
+      "firstName": "Han",
+      "lastName": "Lam",
+      "email": "han@example.com",
+      "id": "3Y-n6QaQQ"
+    }
+  ]
+}

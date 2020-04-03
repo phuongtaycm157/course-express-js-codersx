@@ -4,27 +4,11 @@ var port = 8008;
 
 var bodyParser = require('body-parser');
 
-var users = [{
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john@example.com'
-    },
-    {
-        firstName: 'Mary',
-        lastName: 'Moe',
-        email: 'mary@example.com'
-    },
-    {
-        firstName: 'July',
-        lastName: 'Dooley',
-        email: 'july@example.com'
-    },
-    {
-        firstName: 'Tay',
-        lastName: 'Nguyen',
-        email: 'tay@example.com'
-    }
-];
+var low = require('lowdb');
+var FileSync = require('lowdb/adapters/FileSync');
+var adapter = new FileSync('db.json');
+var db = low(adapter);
+var shortid = require('shortid');
 
 app.set('views', './views');
 app.set('view engine', 'pug');
@@ -32,6 +16,7 @@ app.set('view engine', 'pug');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 
+// =====================================================
 
 app.get('/', function(request, response) {
     response.render('index', {
@@ -40,12 +25,12 @@ app.get('/', function(request, response) {
 });
 
 app.get('/users', function(request, response) {
-    response.render('users/index', { users: users });
+    response.render('users/index', { users: db.get('users').value() });
 });
 
 app.get('/users/search', function(req, res) {
     var q = req.query.q;
-    var matchUsers = users.filter(function(user) {
+    var matchUsers = db.get('users').value().filter(function(user) {
         return user.firstName.toLowerCase().indexOf(q.toLowerCase()) !== -1 || user.lastName.toLowerCase().indexOf(q.toLowerCase()) !== -1;
     });
     res.render('users/index', { users: matchUsers, q: q });
@@ -56,7 +41,9 @@ app.get('/users/create', function(req, res) {
 });
 
 app.post('/users/create', function(req, res) {
-	users.push(req.body);
+    user = req.body;
+    user.id = shortid.generate()
+	db.get('users').push(user).write();
 	res.redirect('/users');
 });
 
