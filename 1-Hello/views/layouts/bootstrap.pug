@@ -11,6 +11,24 @@ html
     title Index
 
   body
+    .navbar.navbar-expand-lg.navbar-light.bg-light
+        .container
+            a(href="/" class="navbar-brand") Tay's Website
+
+            button(class="navbar-toggler" data-target="#navcol" data-toggle="collapse")
+                span.navbar-toggler-icon
+
+            .collapse.navbar-collapse#navcol
+                ul.navbar-nav.ml-auto
+                    li.nav-item
+                        a.nav-link.active(href="/") Home
+                    li.nav-item
+                        a.nav-link.active(href="/users") User
+                    li.nav-item
+                        a.nav-link.active(href="/") About
+                    li.nav-item
+                        a.nav-link.active(href="/") Contact
+
     block content
 
     //Optional JavaScript
