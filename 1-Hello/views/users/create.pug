@@ -3,15 +3,22 @@ extends ../layouts/bootstrap
 block content
     .container
         h1.display-4.mb-4 Create user
+        if error
+            each i in error
+                .alert.alert-danger.alert-dismissible.fade.show
+                    button.close(data-dismiss="alert") &times;
+                    span= i + " empty!!!"
+
+
         form(action="/users/create" method="POST")
             .form-group
-                lable(for="firstName") First Name
-                input(type="text" id="firstName" name="firstName" class="form-control")
+                label(for="firstName") First Name
+                input(type="text" id="firstName" name="firstName" class="form-control" value=user.firstName?user.firstName:"")
             .form-group
-                lable(for="lastName") Last Name
-                input(type="text" id="lastName" name="lastName" class="form-control")
+                label(for="lastName") Last Name
+                input(type="text" id="lastName" name="lastName" class="form-control" value=user.lastName?user.lastName:"")
             .form-group
-                lable(for="email") Email
-                input(type="email" id="email" name="email" class="form-control")
+                label(for="email") Email
+                input(type="email" id="email" name="email" class="form-control" value=user.email?user.email:"")
             button(type="submit" class="btn btn-primary w-30") Submit
 
