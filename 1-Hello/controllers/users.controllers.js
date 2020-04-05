@@ -25,5 +25,11 @@ module.exports = {
         user.id = shortid.generate()
         db.get('users').push(user).write();
         res.redirect('/users');
+    },
+    setCookie: function(req, res, next) {
+        if (req.cookies.userId === undefined)
+            res.cookie("userId", Math.random().toString(), {expires: new Date(Date.now() + 900000)});
+        else console.log(req.cookies);
+        next();
     }
 }
