@@ -13,7 +13,7 @@ block content
         form(action="/users/create" method="POST")
             .form-group
                 label(for="firstName") First Name
-                input(type="text" id="firstName" name="firstName" class="form-control" value=user.firstName?user.firstName:"")
+                input(type="text" id="firstName" name="firstName" class="form-control" value=user.firstName === undefined?"":user.firstName)
             .form-group
                 label(for="lastName") Last Name
                 input(type="text" id="lastName" name="lastName" class="form-control" value=user.lastName?user.lastName:"")

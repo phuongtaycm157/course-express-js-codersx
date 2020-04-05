@@ -18,21 +18,10 @@ module.exports = {
         res.render('users/index', { users: matchUsers, q: q });
     },
     getCreate: function(req, res) {
-        res.render('users/create');
+        res.render('users/create',{user: {}});
     },
     postCreate: function(req, res) {
         var user = req.body;
-        var error = []
-        if (!user.firstName) error.push('First Name');
-        if (!user.lastName) error.push('Last Name');
-        if (!user.email) error.push('Email');
-        if (error.length){
-            res.render('users/create',{
-                user: user,
-                error: error
-            });
-            return;
-        }
         user.id = shortid.generate()
         db.get('users').push(user).write();
         res.redirect('/users');
